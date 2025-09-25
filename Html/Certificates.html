@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyProfile - Certificates</title>
+    <link rel="stylesheet" href="../css/certificates.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="Titel">
+            <i class="fa-solid fa-id-card-clip"></i>
+            <strong>A<span>T</span>F</strong>
+        </div>
+        
+        <nav>
+            <ul class="nav">
+                <li><a href="../index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="cv.html"><i class="fa-regular fa-file-lines"></i> Resume</a></li>
+                <li><a href="projects.html"><i class="fa-solid fa-laptop-code"></i> Projects</a></li>
+                <li><a href="certificates.html"><i class="fa-solid fa-award"></i> Certificates</a></li>
+                <li><a href="contact.html"><i class="fa-regular fa-envelope"></i> Contact</a></li>
+            </ul>
+            <ul class="nav-right">
+                <li><a href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+                <li><a href="signup.html"><i class="fa-solid fa-user-plus"></i> Signup</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+    <main class="certificates-main">
+        <div class="container">
+            <div class="cert-text">
+                <h1>My Certificates</h1>
+                <p>Here are some certificates I've earned to enhance my skills and knowledge. All certificates are <strong>provided by YALI</strong>.</p>
+            </div>
+
+            <div class="cert-boxes">
+                <div class="cert-box">
+                    <div class="cert-title">English Level A1</div>
+                    <img src="../levels/Scan0001.jpg" alt="English A1 Certificate">
+                </div>
+                <div class="cert-box">
+                    <div class="cert-title">English Level B1</div>
+                    <img src="../levels/Scan0002.jpg" alt="English B1 Certificate">
+                </div>
+                <div class="cert-box">
+                    <div class="cert-title">English Level B3</div>
+                    <img src="../levels/Scan0003.jpg" alt="Cyber Security Certificate">
+                </div>
+                <div class="cert-box">
+                    <div class="cert-title">English Level B1</div>
+                    <img src="../levels/Scan0004.jpg" alt="Python Certificate">
+                </div>
+                <div class="cert-box">
+                    <div class="cert-title">English Level A3</div>
+                    <img src="../levels/Scan0005.jpg" alt="Python Certificate">
+                </div><div class="cert-box">
+                    <div class="cert-title">English Level B4</div>
+                    <img src="../levels/Scan0006.jpg" alt="Python Certificate">
+                </div>
+
+            </div>
+        </div>
+        <button id="changeBgBtn" class="btn change-bg-btn">Change Background</button>
+    </main>
+
+    <footer class="site-footer">
+        Copyright © 2025 ProFile | Designed By Eng. Abdul Latif | All rights reserved
+    </footer>
+
+    <script>
+        const btn = document.getElementById('changeBgBtn');
+        if (btn) {
+            btn.addEventListener('click', () => {
+                const colors = [
+                    'linear-gradient(135deg, #22282a, #58f3b2)', 
+                    'linear-gradient(135deg, #ff274d, #f7bcf7)',
+                    'linear-gradient(135deg, #333333, #58f3b2)',
+                    'linear-gradient(135deg, #58f3b2, #ff274d)',
+                    'linear-gradient(135deg, #22282a, #ff274d)'
+                ];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                document.body.style.background = randomColor;
+            });
+        }
+    </script>
+</body>
+</html>

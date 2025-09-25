@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyProfile - Sign Up</title>
+    <link rel="stylesheet" href="../css/sinup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <header>
+        <div class="Titel">
+            <i class="fa-solid fa-id-card-clip"></i>
+            <strong>A<span>T</span>F</strong>
+        </div>
+        
+        <nav>
+            <ul class="nav">
+                <li><a href="../index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="cv.html"><i class="fa-regular fa-file-lines"></i> Resume</a></li>
+                <li><a href="projects.html"><i class="fa-solid fa-laptop-code"></i> Projects</a></li>
+                <li><a href="certificates.html"><i class="fa-solid fa-award"></i> Certificates</a></li>
+                <li><a href="contact.html"><i class="fa-regular fa-envelope"></i> Contact</a></li>
+            </ul>
+            <ul class="nav-right">
+                <li><a href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+                <li><a href="signup.html"><i class="fa-solid fa-user-plus"></i> Signup</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+    <main class="signup-main">
+        <div class="container">
+
+                <form id="registrationForm">
+                    <h1>Create Your Account</h1>
+                    <div class="form-group">
+                        <!-- <label for="name">Full Name</label> -->
+                        <input type="text" id="name" placeholder="Full Name"   >
+                        <div class="error" id="nameError">Please enter your name</div>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- <label for="email">Email Address</label> -->
+                        <input type="email" id="email" placeholder="Enter your email">
+                        <div class="error" id="emailError">Please enter a valid email address</div>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- <label for="password">Password</label> -->
+                        <input type="password" id="password" placeholder="Create a password">
+                        <div class="password-strength">
+                            <div class="strength-fill" id="passwordStrength"></div>
+                        </div>
+                        <div class="error" id="passwordError">Password must be at least 8 characters</div>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- <label for="confirmPassword">Confirm Password</label> -->
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password">
+                        <div class="error" id="confirmPasswordError">Passwords do not match</div>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- <label for="age">Age</label> -->
+                        <input type="number" id="age" placeholder="Enter your age" min="13">
+                        <div class="error" id="ageError">You must be at least 13 years old</div>
+                    </div>
+
+                    <div class="country">
+                        <p>country</p>
+                        <select id="country" class="country">
+                            <option value="" >Select your country</option>
+                            <option value="usa">United States</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="canada">Canada</option>
+                            <option value="australia">Australia</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="error" id="countryError">Please select your country</div>
+                    </div>
+
+                    <button type="submit" class="btn">Create Account</button>
+                </form>
+
+                <div class="register-link">
+                    <p>Already have an account? <a href="login.html">Login</a></p>
+                </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        Copyright © 2025 ProFile | Designed By Eng. Abdul Latif | All rights reserved
+    </footer>
+    
+    <script>
+        // // Simple JavaScript for demonstration
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     console.log("Sign Up page loaded");
+        // });
+          document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('registrationForm');
+
+            // Get all input fields
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const ageInput = document.getElementById('age');
+            const countryInput = document.getElementById('country');
+
+            // Get all error elements
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            const confirmPasswordError = document.getElementById('confirmPasswordError');
+            const ageError = document.getElementById('ageError');
+            const countryError = document.getElementById('countryError');
+
+            // Password strength indicator
+            const passwordStrength = document.getElementById('passwordStrength');
+
+            // Validate name
+            nameInput.addEventListener('blur', function () {
+                if (nameInput.value.trim() === '') {
+                    showError(nameInput, nameError, 'Name is required');
+                } else {
+                    showSuccess(nameInput);
+                    hideError(nameError);
+                }
+            });
+
+            // Validate email
+            emailInput.addEventListener('blur', function () {
+                if (emailInput.value === '') {
+                    showError(emailInput, emailError, 'Email is required');
+                } else if (!isValidEmail(emailInput.value)) {
+                    showError(emailInput, emailError, 'Please enter a valid email address');
+                } else {
+                    showSuccess(emailInput);
+                    hideError(emailError);
+                }
+            });
+
+            // Validate password and show strength
+            passwordInput.addEventListener('input', function () {
+                validatePassword();
+                updatePasswordStrength(passwordInput.value);
+            });
+
+            // Validate confirm password
+            confirmPasswordInput.addEventListener('blur', function () {
+                if (confirmPasswordInput.value !== passwordInput.value) {
+                    showError(confirmPasswordInput, confirmPasswordError, 'Passwords do not match');
+                } else {
+                    showSuccess(confirmPasswordInput);
+                    hideError(confirmPasswordError);
+                }
+            });
+
+            // Validate age
+            ageInput.addEventListener('blur', function () {
+                if (ageInput.value === '') {
+                    showError(ageInput, ageError, 'Age is required');
+                } else if (parseInt(ageInput.value) < 13) {
+                    showError(ageInput, ageError, 'You must be at least 13 years old');
+                } else {
+                    showSuccess(ageInput);
+                    hideError(ageError);
+                }
+            });
+
+            // Validate country
+            countryInput.addEventListener('change', function () {
+                if (countryInput.value === '') {
+                    showError(countryInput, countryError, 'Please select your country');
+                } else {
+                    showSuccess(countryInput);
+                    hideError(countryError);
+                }
+            });
+
+            // Form submission
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Validate all fields
+                let isValid = true;
+
+                if (nameInput.value.trim() === '') {
+                    showError(nameInput, nameError, 'Name is required');
+                    isValid = false;
+                }
+
+                if (emailInput.value === '') {
+                    showError(emailInput, emailError, 'Email is required');
+                    isValid = false;
+                } else if (!isValidEmail(emailInput.value)) {
+                    showError(emailInput, emailError, 'Please enter a valid email address');
+                    isValid = false;
+                }
+
+                if (!validatePassword()) {
+                    isValid = false;
+                }
+
+                if (confirmPasswordInput.value !== passwordInput.value) {
+                    showError(confirmPasswordInput, confirmPasswordError, 'Passwords do not match');
+                    isValid = false;
+                }
+
+                if (ageInput.value === '') {
+                    showError(ageInput, ageError, 'Age is required');
+                    isValid = false;
+                } else if (parseInt(ageInput.value) < 13) {
+                    showError(ageInput, ageError, 'You must be at least 13 years old');
+                    isValid = false;
+                }
+
+                if (countryInput.value === '') {
+                    showError(countryInput, countryError, 'Please select your country');
+                    isValid = false;
+                }
+
+                // If form is valid, show success message
+                if (isValid) {
+                    alert('Form submitted successfully!');
+                    form.reset();
+                    passwordStrength.style.width = '0%';
+
+                    // Remove success styles
+                    const inputs = form.querySelectorAll('input, select');
+                    inputs.forEach(input => {
+                        input.classList.remove('input-success');
+                    });
+                }
+            });
+
+            // Helper functions
+            function showError(input, errorElement, message) {
+                input.classList.add('input-error');
+                input.classList.remove('input-success');
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+
+            function showSuccess(input) {
+                input.classList.remove('input-error');
+                input.classList.add('input-success');
+            }
+
+            function hideError(errorElement) {
+                errorElement.style.display = 'none';
+            }
+
+            function isValidEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+
+            function validatePassword() {
+                if (passwordInput.value.length < 8) {
+                    showError(passwordInput, passwordError, 'Password must be at least 8 characters');
+                    return false;
+                } else {
+                    showSuccess(passwordInput);
+                    hideError(passwordError);
+                    return true;
+                }
+            }
+
+            function updatePasswordStrength(password) {
+                let strength = 0;
+
+                if (password.length >= 8) strength += 25;
+                if (/[A-Z]/.test(password)) strength += 25;
+                if (/[0-9]/.test(password)) strength += 25;
+                if (/[^A-Za-z0-9]/.test(password)) strength += 25;
+
+                passwordStrength.style.width = strength + '%';
+
+                // Update color based on strength
+                if (strength < 50) {
+                    passwordStrength.style.backgroundColor = '#e74c3c';
+                } else if (strength < 75) {
+                    passwordStrength.style.backgroundColor = '#f39c12';
+                } else {
+                    passwordStrength.style.backgroundColor = '#2ecc71';
+                }
+            }
+        });
+        
+        
+
+    </script>
+</body>
+</html>

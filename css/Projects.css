@@ -1,0 +1,312 @@
+:root{
+    --shirt: #c0c0c0;  
+    --pants: #000000;  
+    --accent: #222222; 
+    --muted: #cfcfcf;
+}
+  
+*{ 
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif; 
+}
+  
+body{
+    background-image:url(../images/login.jpg);
+    background-attachment: fixed;
+    backdrop-filter: blur(3.5px);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #e9e9e9;
+    min-height:100vh;
+    display: flex;
+    flex-direction: column;
+}
+  
+/* Header */
+header{
+    width:100%;
+    padding:18px 28px;
+    display:flex;
+    align-items:center;
+    gap:30px;
+    background: rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur(4px);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+.Titel{ 
+    display:flex; 
+    align-items:center; 
+    gap:10px; 
+    color:var(--shirt); 
+    font-weight:700; 
+    font-size:18px; 
+}
+.Titel i{ 
+    color:var(--shirt); 
+    font-size:20px; 
+}
+.Titel span {
+    color: #ff274d;
+}
+  
+/* Nav */
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 这会将两个列表推到两端 */
+    width: 100%;
+}
+
+/* 主导航列表样式 */
+nav ul.nav{ 
+    list-style:none; 
+    display:flex; 
+    gap:12px; 
+    margin: 0; /* 移除默认边距 */
+    padding: 0; /* 移除默认内边距 */
+}
+
+/* 右侧导航列表样式 */
+nav ul.nav-right { 
+    list-style:none; 
+    display:flex; 
+    gap:12px; 
+    margin: 0; /* 移除默认边距 */
+    padding: 0; /* 移除默认内边距 */
+}
+
+/* 两个列表中的链接共享样式 */
+nav ul.nav li a,
+nav ul.nav-right li a {
+  color: rgba(255,255,255,0.75);
+  text-decoration:none;
+  padding:6px 10px;
+  border-radius:8px;
+  font-size:14px;
+}
+
+/* 悬停和激活状态样式 */
+nav ul.nav li a:hover, 
+nav ul.nav li a.active,
+nav ul.nav-right li a:hover, 
+nav ul.nav-right li a.active { 
+    background: rgba(255,255,255,0.04); 
+    color: #fff; 
+}
+
+/* Main Content */
+.projects-main {
+    flex: 1;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+.container {
+    max-width: 1200px;
+    width: 100%;
+}
+  
+.projects-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+  
+.projects-title {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+  
+.projects-desc {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+  
+/* Project Boxes */
+.project-boxes {
+    width: 100%;
+}
+  
+.project-box {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 50px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    align-items: center;
+}
+.project-media:hover {
+    transform: translateY(-8px);
+}
+  
+.project-box-reverse {
+    flex-direction: row-reverse;
+    
+}
+  
+.project-text {
+    flex: 1;
+}
+  
+.project-text h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+  
+.project-text p {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+  
+.project-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 28px;
+    background: var(--shirt); 
+    color: var(--accent); 
+    font-weight:700;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+  
+.project-btn:hover { 
+    opacity:0.95; 
+    transform:translateY(-2px); 
+    background: #a0a0a0;
+    color: var(--accent);
+}
+  
+.project-media {
+    flex: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    position: relative;
+    height: 300px; 
+      transition: all 0.3s ease;
+
+}
+  
+.project-media img, .project-media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    align-items: center;
+      transition: all 0.3s ease;
+
+}
+  
+.project-media:hover { 
+    opacity:0.95; 
+    transform:translateY(-2px); 
+    background: #a0a0a0;
+    color: var(--accent);
+}
+/* Change Background Button */
+.change-bg-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 28px;
+    background: var(--shirt); 
+    color: var(--accent); 
+    font-weight:700;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    transition: all 0.3s ease;
+    border: none;
+}
+  
+.change-bg-btn:hover { 
+    opacity:0.95; 
+    transform:translateY(-2px); 
+    background: #a0a0a0;
+    color: var(--accent);
+}
+  
+/* Footer */
+.site-footer{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.37); 
+    color: #cfcfcf;
+    font-size: 14px;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+    border-top: 1px solid rgba(255,255,255,0.03);
+    z-index: 100;
+    padding: 0 16px;
+    text-align: center;
+    box-shadow: 0 -6px 18px rgba(0,0,0,0.6);
+    margin-top: auto; 
+}
+  
+/* Responsive */
+@media (max-width: 992px) {
+    .project-box {
+        flex-direction: column !important; 
+    }
+    
+    .project-media {
+        width: 100%;
+        height: 200px;
+    }
+    
+    .project-text {
+        width: 100%;
+    }
+    
+    nav {
+        flex-wrap: wrap; 
+    }
+    nav ul.nav, nav ul.nav-right {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 10px; 
+    }
+    nav ul.nav li a, nav ul.nav-right li a {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+}
+  
+@media (max-width: 768px) {
+    .projects-title {
+      font-size: 2rem;
+    }
+    
+    .projects-desc {
+      font-size: 1rem;
+    }
+    
+    .project-text h3 {
+        font-size: 1.5rem;
+    }
+    
+    .project-media {
+        height: 250px;
+    }
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyProfile - Projects</title>
+    <link rel="stylesheet" href="../css/projects.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="Titel">
+            <i class="fa-solid fa-id-card-clip"></i>
+            <strong>A<span>T</span>F</strong>
+        </div>
+        
+        <nav>
+            <ul class="nav">
+                <li><a href="../index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="cv.html"><i class="fa-regular fa-file-lines"></i> Resume</a></li>
+                <li><a href="projects.html"><i class="fa-solid fa-laptop-code"></i> Projects</a></li>
+                <li><a href="certificates.html"><i class="fa-solid fa-award"></i> Certificates</a></li>
+                <li><a href="contact.html"><i class="fa-regular fa-envelope"></i> Contact</a></li>
+            </ul>
+            <ul class="nav-right">
+                <li><a href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+                <li><a href="signup.html"><i class="fa-solid fa-user-plus"></i> Signup</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+    <main class="projects-main">
+        <div class="container">
+            <div class="projects-header">
+                <h1 class="projects-title">My Projects</h1>
+                <p class="projects-desc">
+                    Here are some of my projects, including this personal portfolio website and other experiences.
+                </p>
+            </div>
+
+            <div class="project-boxes">
+                <!-- Project 1 -->
+                <div class="project-box">
+                    <div class="project-text">
+                        <h3>Personal Portfolio Web</h3>
+                        <p>This is the website you are currently visiting. It demonstrates my skills in HTML, CSS, and JavaScript.</p>
+                        <a href="index.html" class="btn project-btn">View Project</a>
+                    </div>
+                    <div class="project-media">
+                        <img src="../images/55.png" alt="Portfolio Project">
+                    </div>
+                </div>
+
+                <!-- Project 2-->
+                <div class="project-box-reverse">
+                    <div class="project-media" ali>
+                       <video id="myVideo" poster="../images/project2_poster.jpg" muted controls>
+                          <source src="../video/Hackers - Stock Footage Collection(360P).mp4" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
+                    </div>
+                    <div class="project-text">
+                        <h3>CYBER SECURETY</h3>
+                        <p>A demo video showcasing a restaurant project. Includes menu layout and design elements.</p>
+                        <a href="#" class="btn project-btn">View Project</a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-box">
+                    <div class="project-text">
+                        <h3>C++ Banking System</h3>
+                        <p>A secure and integrated banking management system</p>
+                        <a href="#" class="btn project-btn">View Project</a>
+                    </div>
+                    <div class="project-media">
+                        <img src="../images/login2.jpg" alt="Travel Project">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button id="changeBgBtn" class="btn change-bg-btn">Change Background</button>
+    </main>
+
+    <footer class="site-footer">
+        Copyright © 2025 ProFile | Designed By Eng. AbdulLatif | All rights reserved
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const vid = document.getElementById('myVideo');
+            if (!vid) return;
+
+            const container = vid.closest('.project-media') || vid;
+
+            container.addEventListener('mouseenter', () => {
+                vid.muted = true;  
+                vid.play().catch(err => console.warn("Error playing video:", err));
+            });
+
+            container.addEventListener('mouseleave', () => {
+                vid.pause();
+                vid.currentTime = 0;
+            });
+        });
+
+        const btn = document.getElementById('changeBgBtn');
+        if (btn) {
+            btn.addEventListener('click', () => {
+                const colors = [
+                    'linear-gradient(135deg, #22282a, #58f3b2)', 
+                    'linear-gradient(135deg, #ff274d, #f7bcf7)',
+                    'linear-gradient(135deg, #333333, #58f3b2)',
+                    'linear-gradient(135deg, #58f3b2, #ff274d)',
+                    'linear-gradient(135deg, #22282a, #ff274d)'
+                ];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                document.body.style.background = randomColor;
+            });
+        }
+    </script>
+</body>
+</html>

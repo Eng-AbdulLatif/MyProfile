@@ -1,0 +1,401 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Form Validation</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #4a6fc7;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .header h2 {
+            font-weight: 600;
+        }
+
+        .form-container {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #4a6fc7;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success {
+            color: #2ecc71;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        button {
+            background: #4a6fc7;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #3a5bb0;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+
+        .form-footer a {
+            color: #4a6fc7;
+            text-decoration: none;
+        }
+
+        .input-success {
+            border-color: #2ecc71;
+        }
+
+        .input-error {
+            border-color: #e74c3c;
+        }
+
+        .password-strength {
+            margin-top: 5px;
+            height: 5px;
+            border-radius: 3px;
+            background: #eee;
+        }
+
+        .strength-fill {
+            height: 100%;
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.3s, background 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Create Your Account</h2>
+        </div>
+
+        <div class="form-container">
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your full name">
+                    <div class="error" id="nameError">Please enter your name</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                    <div class="error" id="emailError">Please enter a valid email address</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Create a password">
+                    <div class="password-strength">
+                        <div class="strength-fill" id="passwordStrength"></div>
+                    </div>
+                    <div class="error" id="passwordError">Password must be at least 8 characters</div>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password"  required>
+                    <div class="error" id="confirmPasswordError">Passwords do not match</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" placeholder="Enter your age" min="13">
+                    <div class="error" id="ageError">You must be at least 13 years old</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <select id="country">
+                        <option value="">Select your country</option>
+                        <option value="usa">United States</option>
+                        <option value="uk">United Kingdom</option>
+                        <option value="canada">Canada</option>
+                        <option value="australia">Australia</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <div class="error" id="countryError">Please select your country</div>
+                </div>
+
+                <button type="submit">Create Account</button>
+            </form>
+
+            <div class="form-footer">
+                <p>Already have an account? <a href="#">Sign in</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('registrationForm');
+
+            // Get all input fields
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const ageInput = document.getElementById('age');
+            const countryInput = document.getElementById('country');
+
+            // Get all error elements
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            const confirmPasswordError = document.getElementById('confirmPasswordError');
+            const ageError = document.getElementById('ageError');
+            const countryError = document.getElementById('countryError');
+
+            // Password strength indicator
+            const passwordStrength = document.getElementById('passwordStrength');
+
+            // Validate name
+            nameInput.addEventListener('blur', function () {
+                if (nameInput.value.trim() === '') {
+                    showError(nameInput, nameError, 'Name is required');
+                } else {
+                    showSuccess(nameInput);
+                    hideError(nameError);
+                }
+            });
+
+            // Validate email
+            emailInput.addEventListener('blur', function () {
+                if (emailInput.value === '') {
+                    showError(emailInput, emailError, 'Email is required');
+                } else if (!isValidEmail(emailInput.value)) {
+                    showError(emailInput, emailError, 'Please enter a valid email address');
+                } else {
+                    showSuccess(emailInput);
+                    hideError(emailError);
+                }
+            });
+
+            // Validate password and show strength
+            passwordInput.addEventListener('input', function () {
+                validatePassword();
+                updatePasswordStrength(passwordInput.value);
+            });
+
+            // Validate confirm password
+            confirmPasswordInput.addEventListener('blur', function () {
+                if (confirmPasswordInput.value !== passwordInput.value) {
+                    showError(confirmPasswordInput, confirmPasswordError, 'Passwords do not match');
+                } else {
+                    showSuccess(confirmPasswordInput);
+                    hideError(confirmPasswordError);
+                }
+            });
+
+            // Validate age
+            ageInput.addEventListener('blur', function () {
+                if (ageInput.value === '') {
+                    showError(ageInput, ageError, 'Age is required');
+                } else if (parseInt(ageInput.value) < 13) {
+                    showError(ageInput, ageError, 'You must be at least 13 years old');
+                } else {
+                    showSuccess(ageInput);
+                    hideError(ageError);
+                }
+            });
+
+            // Validate country
+            countryInput.addEventListener('change', function () {
+                if (countryInput.value === '') {
+                    showError(countryInput, countryError, 'Please select your country');
+                } else {
+                    showSuccess(countryInput);
+                    hideError(countryError);
+                }
+            });
+
+            // Form submission
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Validate all fields
+                let isValid = true;
+
+                if (nameInput.value.trim() === '') {
+                    showError(nameInput, nameError, 'Name is required');
+                    isValid = false;
+                }
+
+                if (emailInput.value === '') {
+                    showError(emailInput, emailError, 'Email is required');
+                    isValid = false;
+                } else if (!isValidEmail(emailInput.value)) {
+                    showError(emailInput, emailError, 'Please enter a valid email address');
+                    isValid = false;
+                }
+
+                if (!validatePassword()) {
+                    isValid = false;
+                }
+
+                if (confirmPasswordInput.value !== passwordInput.value) {
+                    showError(confirmPasswordInput, confirmPasswordError, 'Passwords do not match');
+                    isValid = false;
+                }
+
+                if (ageInput.value === '') {
+                    showError(ageInput, ageError, 'Age is required');
+                    isValid = false;
+                } else if (parseInt(ageInput.value) < 13) {
+                    showError(ageInput, ageError, 'You must be at least 13 years old');
+                    isValid = false;
+                }
+
+                if (countryInput.value === '') {
+                    showError(countryInput, countryError, 'Please select your country');
+                    isValid = false;
+                }
+
+                // If form is valid, show success message
+                if (isValid) {
+                    alert('Form submitted successfully!');
+                    form.reset();
+                    passwordStrength.style.width = '0%';
+
+                    // Remove success styles
+                    const inputs = form.querySelectorAll('input, select');
+                    inputs.forEach(input => {
+                        input.classList.remove('input-success');
+                    });
+                }
+            });
+
+            // Helper functions
+            function showError(input, errorElement, message) {
+                input.classList.add('input-error');
+                input.classList.remove('input-success');
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+
+            function showSuccess(input) {
+                input.classList.remove('input-error');
+                input.classList.add('input-success');
+            }
+
+            function hideError(errorElement) {
+                errorElement.style.display = 'none';
+            }
+
+            function isValidEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+
+            function validatePassword() {
+                if (passwordInput.value.length < 8) {
+                    showError(passwordInput, passwordError, 'Password must be at least 8 characters');
+                    return false;
+                } else {
+                    showSuccess(passwordInput);
+                    hideError(passwordError);
+                    return true;
+                }
+            }
+
+            function updatePasswordStrength(password) {
+                let strength = 0;
+
+                if (password.length >= 8) strength += 25;
+                if (/[A-Z]/.test(password)) strength += 25;
+                if (/[0-9]/.test(password)) strength += 25;
+                if (/[^A-Za-z0-9]/.test(password)) strength += 25;
+
+                passwordStrength.style.width = strength + '%';
+
+                // Update color based on strength
+                if (strength < 50) {
+                    passwordStrength.style.backgroundColor = '#e74c3c';
+                } else if (strength < 75) {
+                    passwordStrength.style.backgroundColor = '#f39c12';
+                } else {
+                    passwordStrength.style.backgroundColor = '#2ecc71';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
